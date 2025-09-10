@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xcopy:*)",
+      "Bash(robocopy:*)",
+      "Bash(copy \"sample\\Company Website for IT Services\\package.json\" .)",
+      "Bash(npm install:*)",
+      "Bash(ngrok:*)",
+      "Bash(dir:*)",
+      "Bash(npm run dev:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
