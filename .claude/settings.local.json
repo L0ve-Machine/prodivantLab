@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__figma-dev-mode-mcp-server__get_screenshot",
+      "mcp__figma-dev-mode-mcp-server__get_code",
+      "Bash(start index.html)",
+      "Bash(del index.html)",
+      "Bash(del Header5.jsx)",
+      "Bash(curl:*)",
+      "Bash(start figma-design.html)",
+      "mcp__figma-dev-mode-mcp-server__get_metadata",
+      "Read(//c/Users/genki/Projects/web/prodivant/**)",
+      "Bash(dir:*)",
+      "WebFetch(domain:www.figma.com)",
+      "Bash(start contact.html)",
+      "Bash(pip install:*)",
+      "Bash(python:*)",
+      "Bash(py --version)",
+      "Bash(envScriptsactivate)",
+      "Bash(cmd /c:*)",
+      "Bash(powershell:*)",
+      "Bash(envScriptspip install django)",
+      "Bash(django-admin startproject:*)",
+      "Bash(mkdir:*)",
+      "Bash(copy index.html maintemplatesindex.html)",
+      "Bash(cp:*)",
+      "Bash(start works.html)",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

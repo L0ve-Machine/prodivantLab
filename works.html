@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Works - Prodivant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Inter:wght@400;500;600;700&family=Prompt:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            background-color: #ffffff;
+        }
+
+        /* Header Styles - Matching index.html style */
+        .header-section {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 25px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-link img {
+            height: 35px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: #0a142f;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #667eea;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #667eea;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu a.active {
+            color: #667eea;
+        }
+
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        /* Works Section */
+        .works-section {
+            padding: 120px 0 80px;
+            background: #ffffff;
+        }
+
+        .works-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        /* Section Header */
+        .works-header {
+            margin-bottom: 60px;
+        }
+
+        .section-label {
+            display: inline-block;
+            background: #000000;
+            color: white;
+            padding: 6px 16px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 32px;
+            font-weight: 400;
+        }
+
+        .section-title-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 56px;
+            font-weight: 300;
+            color: #1a1a1a;
+            letter-spacing: -1px;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .section-title span {
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        /* Filter Buttons */
+        .filter-buttons {
+            display: flex;
+            border: 1px solid #e5e7eb;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: transparent;
+            border: none;
+            border-right: 1px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:last-child {
+            border-right: none;
+        }
+
+        .filter-btn:hover {
+            background: #f9fafb;
+            color: #1a1a1a;
+        }
+
+        .filter-btn.active {
+            background: #000000;
+            color: white;
+        }
+
+        /* Works Grid */
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        /* Work Card */
+        .work-card {
+            background: #ffffff;
+            overflow: hidden;
+            transition: all 0.5s;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .work-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #000000;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .work-card:hover::after {
+            width: 100%;
+        }
+
+        .work-card:hover {
+            background: #fafafa;
+            border-color: #d1d5db;
+        }
+
+
+        /* Work Image */
+        .work-image {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+            background: #f3f4f6;
+        }
+
+        .work-card.large .work-image {
+            height: 400px;
+        }
+
+        .work-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s;
+        }
+
+        .work-card:hover .work-image img {
+            transform: scale(1.02);
+            opacity: 0.95;
+        }
+
+        /* Image Overlay */
+        .work-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 40%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .work-card:hover .work-image-overlay {
+            opacity: 1;
+        }
+
+        /* Work Badge */
+        .work-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #000000;
+            color: white;
+            padding: 4px 12px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 400;
+        }
+
+        /* View Icon */
+        .work-view-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            opacity: 0;
+        }
+
+        .work-card:hover .work-view-icon {
+            opacity: 1;
+            background: #ffffff;
+            border-color: white;
+        }
+
+        .work-view-icon i {
+            color: #000000;
+            font-size: 16px;
+        }
+
+        /* Work CTA */
+        .work-cta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #667eea;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .work-cta i {
+            font-size: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .work-card:hover .work-cta {
+            gap: 12px;
+        }
+
+        .work-card:hover .work-cta i {
+            transform: translateX(4px);
+        }
+
+        /* Work Content */
+        .work-content {
+            padding: 30px;
+        }
+
+        .work-card.large .work-content {
+            padding: 40px;
+        }
+
+        /* Work Meta */
+        .work-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #6b7280;
+        }
+
+        .work-meta span.separator {
+            color: #d1d5db;
+        }
+
+        .work-meta .status {
+            color: #000000;
+            font-weight: 500;
+        }
+
+        /* Work Title */
+        .work-title {
+            font-size: 22px;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            transition: color 0.3s;
+            font-family: 'DM Sans', sans-serif;
+            letter-spacing: -0.5px;
+        }
+
+        .work-card.large .work-title {
+            font-size: 28px;
+        }
+
+        .work-card:hover .work-title {
+            color: #1a1a1a;
+        }
+
+        /* Work Description */
+        .work-description {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+
+        .work-card.large .work-description {
+            font-size: 16px;
+        }
+
+        /* Work Technologies */
+        .work-technologies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tech-tag {
+            padding: 4px 10px;
+            background: transparent;
+            color: #6b7280;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid #d1d5db;
+            transition: all 0.3s;
+        }
+
+        .tech-tag:hover {
+            border-color: #000000;
+            color: #000000;
+            background: transparent;
+        }
+
+
+        /* Footer */
+        .footer-section {
+            width: 100%;
+            background: #ffffff;
+            padding: 80px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(102, 126, 234, 0.5) 50%, transparent 100%);
+        }
+
+        .footer-container {
+            max-width: 1074px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            font-weight: 400;
+            color: #0a142f;
+            margin-bottom: 24px;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.2px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: #667eea;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 15px;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: #667eea;
+        }
+
+        .footer-brand {
+            margin-bottom: 20px;
+        }
+
+        .footer-brand img {
+            height: 40px;
+            width: auto;
+            opacity: 0.9;
+        }
+
+        .footer-brand-text {
+            margin-top: 15px;
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-copyright {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social a {
+            display: inline-block;
+        }
+
+        .footer-social img {
+            width: 20px;
+            height: 20px;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-social img:hover {
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .works-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .section-title-wrapper {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .works-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .works-container {
+                padding: 0 20px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-section">
+        <div class="header-container">
+            <a href="index.html" class="logo-link">
+                <img src="prodivant-high-resolution-logo-transparent.png" alt="Prodivant">
+            </a>
+            <nav class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="#">Services</a>
+                <a href="works.html" class="active">Works</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Works Section -->
+    <section class="works-section">
+        <div class="works-container">
+            <!-- Section Header -->
+            <div class="works-header">
+                <span class="section-label">Our Work</span>
+                <div class="section-title-wrapper">
+                    <h1 class="section-title">Our <span>Projects</span></h1>
+
+                    <!-- Filter Buttons -->
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" onclick="filterWorks('all')">All</button>
+                        <button class="filter-btn" onclick="filterWorks('mobile')">Mobile Apps</button>
+                        <button class="filter-btn" onclick="filterWorks('web')">Web Apps</button>
+                        <button class="filter-btn" onclick="filterWorks('custom')">Custom Software</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Works Grid -->
+            <div class="works-grid" id="worksGrid">
+                <!-- Project 1 -->
+                <div class="work-card" data-category="web" onclick="window.location.href='project-details.html?project=farm'" style="cursor: pointer;">
+                    <div class="work-image">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600" alt="Farm Management System">
+                        <div class="work-image-overlay"></div>
+                        <div class="work-badge">Web Development</div>
+                        <a href="https://kasaipeach.jp/" target="_blank" class="work-view-icon" onclick="event.stopPropagation();">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                    <div class="work-content">
+                        <div class="work-meta">
+                            <span>★★★★★</span>
+                        </div>
+                        <h3 class="work-title">Farm Management System</h3>
+                        <p class="work-description">
+                            <strong>Delivery:</strong> 2.5 Weeks<br>
+                            <strong>Price:</strong> £350<br>
+                            <strong>Features:</strong> Database management, Admin panel, Image upload, Multi-language support, API integration
+                        </p>
+                        <a href="project-details.html?project=farm" style="text-decoration: none;" onclick="event.stopPropagation();">
+                            <div class="work-cta">
+                                <span>View Details</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="work-card" data-category="web" onclick="window.location.href='project-details.html?project=trading'" style="cursor: pointer;">
+                    <div class="work-image">
+                        <img src="portfolio/スクリーンショット 2025-09-05 064800.png" alt="FX Trading Education Platform">
+                        <div class="work-image-overlay"></div>
+                        <div class="work-badge">Full Stack</div>
+                        <a href="http://trade-dojo-fx.com" target="_blank" class="work-view-icon" onclick="event.stopPropagation();">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                    <div class="work-content">
+                        <div class="work-meta">
+                            <span>★★★★★</span>
+                        </div>
+                        <h3 class="work-title">FX Trading Education Platform</h3>
+                        <p class="work-description">
+                            <strong>Delivery:</strong> 3 Weeks<br>
+                            <strong>Price:</strong> £800<br>
+                            <strong>Features:</strong> Video streaming, Live chat, Payment system, Admin panel, Member management
+                        </p>
+                        <a href="project-details.html?project=trading" style="text-decoration: none;" onclick="event.stopPropagation();">
+                            <div class="work-cta">
+                                <span>View Details</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="work-card" data-category="custom" onclick="window.location.href='project-details.html?project=learning'" style="cursor: pointer;">
+                    <div class="work-image">
+                        <img src="https://images.unsplash.com/photo-1516534775068-ba3e7458af70?w=600" alt="Japanese Learning Platform">
+                        <div class="work-image-overlay"></div>
+                        <div class="work-badge">Web Application</div>
+                    </div>
+                    <div class="work-content">
+                        <div class="work-meta">
+                            <span>★★★★★</span>
+                        </div>
+                        <h3 class="work-title">Japanese Learning Platform</h3>
+                        <p class="work-description">
+                            <strong>Delivery:</strong> 4 Weeks<br>
+                            <strong>Price:</strong> £1200<br>
+                            <strong>Features:</strong> User management, Admin panel, Content management, Translation system, Stripe subscription
+                        </p>
+                        <a href="project-details.html?project=learning" style="text-decoration: none;" onclick="event.stopPropagation();">
+                            <div class="work-cta">
+                                <span>View Details</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="work-card" data-category="web">
+                    <div class="work-image">
+                        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600" alt="Collaboration Platform">
+                        <div class="work-image-overlay"></div>
+                        <div class="work-badge">Web App</div>
+                        <div class="work-view-icon">
+                            <i class="fas fa-external-link-alt"></i>
+                        </div>
+                    </div>
+                    <div class="work-content">
+                        <div class="work-meta">
+                            <span>★★★★☆</span>
+                        </div>
+                        <h3 class="work-title">Team Collaboration Suite</h3>
+                        <p class="work-description">
+                            <strong>Delivery:</strong> 2 Weeks<br>
+                            <strong>Price:</strong> £450<br>
+                            <strong>Features:</strong> Real-time chat, Video conferencing, Project management, File sharing
+                        </p>
+                        <a href="project-details.html" style="text-decoration: none;">
+                            <div class="work-cta">
+                                <span>View Details</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mobile App Project 2 -->
+                <div class="work-card" data-category="mobile">
+                    <div class="work-image">
+                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600" alt="Social Media App">
+                        <div class="work-image-overlay"></div>
+                        <div class="work-badge">Mobile App</div>
+                        <div class="work-view-icon">
+                            <i class="fas fa-external-link-alt"></i>
+                        </div>
+                    </div>
+                    <div class="work-content">
+                        <div class="work-meta">
+                            <span>2023</span>
+                            <span class="separator">•</span>
+                            <span>Social</span>
+                            <span class="separator">•</span>
+                            <span class="status">Live</span>
+                        </div>
+                        <h3 class="work-title">Community Social App</h3>
+                        <p class="work-description">
+                            Location-based social networking app with real-time messaging and event planning.
+                        </p>
+                        <div class="work-technologies">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Maps API</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Software Project 2 -->
+                <div class="work-card" data-category="custom">
+                    <div class="work-image">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600" alt="ERP System">
+                        <div class="work-image-overlay"></div>
+                        <div class="work-badge">Custom Software</div>
+                        <div class="work-view-icon">
+                            <i class="fas fa-external-link-alt"></i>
+                        </div>
+                    </div>
+                    <div class="work-content">
+                        <div class="work-meta">
+                            <span>2024</span>
+                            <span class="separator">•</span>
+                            <span>Enterprise</span>
+                            <span class="separator">•</span>
+                            <span class="status">Deployed</span>
+                        </div>
+                        <h3 class="work-title">Enterprise Resource Planning</h3>
+                        <p class="work-description">
+                            Comprehensive ERP solution with inventory, HR, and financial management modules.
+                        </p>
+                        <div class="work-technologies">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Spring Boot</span>
+                            <span class="tech-tag">Oracle</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="footer-container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <div class="footer-brand">
+                        <img src="prodivant-high-resolution-logo-transparent.png" alt="Prodivant">
+                    </div>
+                    <p class="footer-brand-text">
+                        Affordable IT solutions for startups and entrepreneurs.
+                        High-quality development at 1/10 of traditional prices.
+                    </p>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="works.html?filter=mobile">Mobile Apps</a></li>
+                        <li><a href="works.html?filter=web">Web Development</a></li>
+                        <li><a href="works.html?filter=custom">Custom Software</a></li>
+                        <li><a href="#">IT Consulting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="works.html">Works</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Support Center</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="contact.html">Get in Touch</a></li>
+                        <li><a href="mailto:prodivant.jp@gmail.com">prodivant.jp@gmail.com</a></li>
+                        <li><a href="#">Osaka, Japan</a></li>
+                        <li><a href="#">8:00-22:00 JST</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2024 Prodivant. All rights reserved.
+                </div>
+                <div class="footer-social">
+                    <a href="#"><img src="facebook-icon.svg" alt="Facebook"></a>
+                    <a href="#"><img src="twitter-icon.svg" alt="Twitter"></a>
+                    <a href="#"><img src="instagram-icon.svg" alt="Instagram"></a>
+                    <a href="#"><img src="vimeo-icon.svg" alt="Vimeo"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function filterWorks(category) {
+            const cards = document.querySelectorAll('.work-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Update button states
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(category) ||
+                    (category === 'all' && btn.textContent === 'All') ||
+                    (category === 'mobile' && btn.textContent === 'Mobile Apps') ||
+                    (category === 'web' && btn.textContent === 'Web Apps') ||
+                    (category === 'custom' && btn.textContent === 'Custom Software')) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Filter cards
+            cards.forEach(card => {
+                if (category === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    const cardCategory = card.getAttribute('data-category');
+                    if (cardCategory === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // Check URL parameter and apply filter on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const filter = urlParams.get('filter');
+            if (filter) {
+                filterWorks(filter);
+            }
+        });
+    </script>
+</body>
+</html>

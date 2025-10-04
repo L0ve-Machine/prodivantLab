@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details - Prodivant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #0a142f;
+            background-color: #fafafa;
+        }
+
+        /* Header Styles - Matching index.html style */
+        .header-section {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-link {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-link img {
+            height: 35px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: #0a142f;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #667eea;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #667eea;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        /* Project Details Section */
+        .project-details-section {
+            padding: 120px 0 60px;
+            background: #ffffff;
+        }
+
+        .project-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .breadcrumb a {
+            color: #6b7280;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: #000000;
+        }
+
+        .breadcrumb span {
+            margin: 0 10px;
+            color: #d1d5db;
+        }
+
+        /* Project Header */
+        .project-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .project-category {
+            display: inline-block;
+            padding: 6px 16px;
+            background: #000000;
+            color: white;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-radius: 0;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .project-title {
+            font-size: 32px;
+            font-weight: 300;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 0;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        .meta-item i {
+            color: #000000;
+            font-size: 12px;
+        }
+
+        #project-rating {
+            color: #fbbf24;
+        }
+
+        .project-description {
+            display: none;
+        }
+
+        /* Image Gallery */
+        .project-gallery {
+            display: none;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+        }
+
+        .main-image img {
+            background: #000;
+        }
+
+        .thumbnail-grid {
+            display: none;
+        }
+
+        /* Project Info Grid */
+        .project-info-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 60px;
+            margin-bottom: 40px;
+            align-items: start;
+        }
+
+        .project-image-container {
+            width: 100%;
+        }
+
+        .project-image-container .main-image {
+            width: 100%;
+            height: auto;
+            position: relative;
+            border-radius: 0;
+        }
+
+        .project-image-container .main-image img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .image-link-overlay {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            background: transparent;
+        }
+
+        .image-link-overlay:hover {
+            background: #ffffff;
+            border-color: white;
+        }
+
+        .image-link-overlay i {
+            color: #ffffff;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .image-link-overlay:hover i {
+            color: #000000;
+        }
+
+        .project-content {
+            background: transparent;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: none;
+        }
+
+        .content-section {
+            margin-bottom: 25px;
+        }
+
+        .content-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .content-section h2 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #0a142f;
+            font-weight: 400;
+            letter-spacing: -0.3px;
+        }
+
+        .content-section h2 i {
+            display: none;
+        }
+
+        .content-section p {
+            line-height: 1.7;
+            color: #6b7280;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 16px 0;
+            border-bottom: 1px solid #f3f4f6;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 15px;
+            color: #4b5563;
+            font-weight: 300;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list i {
+            color: #667eea;
+            margin-top: 3px;
+            font-size: 12px;
+        }
+
+        /* Project Sidebar */
+        .project-sidebar {
+            position: sticky;
+            top: 120px;
+        }
+
+        .info-card {
+            background: white;
+            border: none;
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+        }
+
+        .info-card h3 {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #0a142f;
+            font-weight: 400;
+            letter-spacing: -0.3px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 18px 0;
+            border-bottom: 1px solid #fafafa;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #9ca3af;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+
+        .info-value {
+            color: #0a142f;
+            font-weight: 400;
+            font-size: 14px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 0;
+        }
+
+        .tech-tag {
+            padding: 6px 12px;
+            background: #f9fafb;
+            color: #6b7280;
+            font-size: 11px;
+            border-radius: 4px;
+            border: 1px solid #f3f4f6;
+            font-weight: 400;
+        }
+
+        .cta-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 40px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .cta-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+        }
+
+        .cta-card p {
+            margin-bottom: 30px;
+            opacity: 0.9;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 14px 32px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 14px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            letter-spacing: 0.3px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .live-site-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: #000000;
+            color: white;
+            text-decoration: none;
+            border-radius: 0;
+            font-weight: 500;
+            font-size: 13px;
+            transition: all 0.3s;
+            letter-spacing: 0.3px;
+            margin-top: 0;
+        }
+
+        .live-site-button:hover {
+            background: #333333;
+        }
+
+        .live-site-button i {
+            font-size: 11px;
+        }
+
+
+        /* Footer */
+        .footer-section {
+            width: 100%;
+            background: #ffffff;
+            padding: 80px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(102, 126, 234, 0.5) 50%, transparent 100%);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            font-weight: 400;
+            color: #0a142f;
+            margin-bottom: 24px;
+            letter-spacing: 0.2px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: #667eea;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 15px;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: #667eea;
+        }
+
+        .footer-brand img {
+            height: 40px;
+            width: auto;
+            opacity: 0.9;
+        }
+
+        .footer-brand-text {
+            margin-top: 15px;
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-copyright {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social a {
+            display: inline-block;
+        }
+
+        .footer-social img {
+            width: 20px;
+            height: 20px;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-social img:hover {
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .project-info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-sidebar {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .project-title {
+                font-size: 32px;
+            }
+
+            .thumbnail-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-columns {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header-container {
+                padding: 15px 20px;
+            }
+
+            .nav-menu {
+                gap: 20px;
+            }
+
+            .nav-menu a {
+                font-size: 12px;
+            }
+
+            .project-container {
+                padding: 0 20px;
+            }
+
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-section">
+        <div class="header-container">
+            <a href="index.html" class="logo-link">
+                <img src="prodivant-high-resolution-logo-transparent.png" alt="Prodivant">
+            </a>
+            <nav class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="#">Services</a>
+                <a href="works.html">Works</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Project Details Section -->
+    <section class="project-details-section">
+        <div class="project-container">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <a href="works.html">Works</a>
+                <span>/</span>
+                <span id="project-name">Project Details</span>
+            </div>
+
+            <!-- Project Header -->
+            <div class="project-header">
+                <span class="project-category" id="project-category">Full Stack Web Application</span>
+                <h1 class="project-title" id="project-title">FX Trading Education Platform</h1>
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span id="delivery-time">3 Weeks Delivery</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-pound-sign"></i>
+                        <span id="project-price">£800</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-star"></i>
+                        <span id="project-rating">★★★★★</span>
+                    </div>
+                </div>
+                <p class="project-description" id="project-description">
+                    A comprehensive video streaming and educational platform developed for one of Japan's top FX traders.
+                    This web application combines video delivery, live chat functionality, and member management into a
+                    unified learning environment.
+                </p>
+            </div>
+
+            <!-- Project Info Grid -->
+            <div class="project-info-grid">
+                <!-- Project Image -->
+                <div class="project-image-container">
+                    <div class="main-image">
+                        <a href="http://trade-dojo-fx.com" target="_blank" class="image-link-overlay">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        <img id="main-image" src="portfolio/スクリーンショット 2025-09-05 064800.png" alt="FX Trading Platform Screenshot">
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="project-content">
+                    <div class="content-section">
+                        <h2>Overview</h2>
+                        <p>
+                            A comprehensive video streaming and educational platform developed for one of Japan's top FX traders.
+                            This web application combines video delivery, live chat functionality, and member management into a
+                            unified learning environment.
+                        </p>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>Technology Stack</h2>
+                        <div class="tech-stack">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">WebRTC</span>
+                            <span class="tech-tag">WebSocket</span>
+                            <span class="tech-tag">Stripe API</span>
+                            <span class="tech-tag">Gmail API</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">Redis</span>
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <a href="http://trade-dojo-fx.com" target="_blank" class="live-site-button">
+                            Visit Website
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="footer-container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <div class="footer-brand">
+                        <img src="prodivant-high-resolution-logo-transparent.png" alt="Prodivant">
+                    </div>
+                    <p class="footer-brand-text">
+                        Affordable IT solutions for startups and entrepreneurs.
+                        High-quality development at 1/10 of traditional prices.
+                    </p>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="works.html?filter=mobile">Mobile Apps</a></li>
+                        <li><a href="works.html?filter=web">Web Development</a></li>
+                        <li><a href="works.html?filter=custom">Custom Software</a></li>
+                        <li><a href="#">IT Consulting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="works.html">Works</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Support Center</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="contact.html">Get in Touch</a></li>
+                        <li><a href="mailto:prodivant.jp@gmail.com">prodivant.jp@gmail.com</a></li>
+                        <li><a href="#">Osaka, Japan</a></li>
+                        <li><a href="#">8:00-22:00 JST</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2024 Prodivant. All rights reserved.
+                </div>
+                <div class="footer-social">
+                    <a href="#"><img src="facebook-icon.svg" alt="Facebook"></a>
+                    <a href="#"><img src="twitter-icon.svg" alt="Twitter"></a>
+                    <a href="#"><img src="instagram-icon.svg" alt="Instagram"></a>
+                    <a href="#"><img src="vimeo-icon.svg" alt="Vimeo"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Change main image when thumbnail is clicked
+        function changeMainImage(src) {
+            document.getElementById('main-image').src = src;
+        }
+
+        // Get URL parameters
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Load project data based on URL parameter
+        function loadProjectData() {
+            const projectId = getUrlParameter('project');
+
+            // Project data (in real app, this would come from a database)
+            const projects = {
+                'farm': {
+                    category: 'Web Application',
+                    title: 'Farm Management System',
+                    delivery: '2.5 Weeks Delivery',
+                    price: '£350',
+                    rating: '★★★★★',
+                    description: 'A comprehensive database management system for agricultural operations. This web application enables centralized management of multiple farms with features for data modification, additions, and administrative controls.',
+                    mainImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200',
+                    overview: 'A comprehensive database management system developed for agricultural operations. Due to confidentiality agreements, only the login page is publicly accessible. The platform enables centralized management of multiple farms with robust administrative features.',
+                    technologies: ['Django', 'PostgreSQL', 'AWS S3', 'REST API'],
+                    siteUrl: 'https://kasaipeach.jp/'
+                },
+                'trading': {
+                    category: 'Full Stack Web Application',
+                    title: 'FX Trading Education Platform',
+                    delivery: '3 Weeks Delivery',
+                    price: '£800',
+                    rating: '★★★★★',
+                    description: 'A comprehensive video streaming and educational platform developed for one of Japan\'s top FX traders. This web application combines video delivery, live chat functionality, and member management into a unified learning environment.',
+                    mainImage: 'portfolio/スクリーンショット 2025-09-05 064800.png',
+                    overview: 'A comprehensive video streaming and educational platform developed for one of Japan\'s top FX traders. This web application combines video delivery, live chat functionality, and member management into a unified learning environment.',
+                    technologies: ['React', 'Django', 'WebRTC', 'WebSocket', 'Stripe API', 'Gmail API', 'PostgreSQL', 'Redis'],
+                    siteUrl: 'http://trade-dojo-fx.com'
+                },
+                'learning': {
+                    category: 'Web Application',
+                    title: 'Japanese Learning Platform',
+                    delivery: '4 Weeks Delivery',
+                    price: '£1,200',
+                    rating: '★★★★★',
+                    description: 'An educational platform for Japanese language learning with comprehensive content management and subscription features.',
+                    mainImage: 'https://images.unsplash.com/photo-1516534775068-ba3e7458af70?w=1200',
+                    overview: 'A comprehensive Japanese language learning platform featuring user authentication, content management, translation systems, and subscription-based access. The platform includes an admin panel for managing learning materials and translation data, with premium features available through Stripe integration.',
+                    technologies: ['Django', 'PostgreSQL', 'Stripe API', 'REST API'],
+                    siteUrl: null
+                }
+            };
+
+            if (projectId && projects[projectId]) {
+                const project = projects[projectId];
+                document.getElementById('project-category').textContent = project.category;
+                document.getElementById('project-title').textContent = project.title;
+                document.getElementById('delivery-time').textContent = project.delivery;
+                document.getElementById('project-price').textContent = project.price;
+                document.getElementById('project-rating').textContent = project.rating;
+                document.getElementById('project-description').textContent = project.description;
+                document.getElementById('main-image').src = project.mainImage;
+                document.getElementById('project-name').textContent = project.title;
+
+                // Update overview text
+                const overviewText = document.querySelector('.content-section p');
+                if (overviewText && project.overview) {
+                    overviewText.textContent = project.overview;
+                }
+
+                // Update technology stack
+                const techStack = document.querySelector('.tech-stack');
+                if (techStack && project.technologies) {
+                    techStack.innerHTML = project.technologies.map(tech =>
+                        `<span class="tech-tag">${tech}</span>`
+                    ).join('');
+                }
+
+                // Update site link
+                const siteLink = document.querySelector('.live-site-button');
+                const imageLink = document.querySelector('.image-link-overlay');
+
+                if (project.siteUrl) {
+                    if (siteLink) siteLink.href = project.siteUrl;
+                    if (imageLink) imageLink.href = project.siteUrl;
+                } else {
+                    if (siteLink) siteLink.style.display = 'none';
+                    if (imageLink) imageLink.style.display = 'none';
+                }
+            }
+        }
+
+        // Load project data on page load
+        window.addEventListener('DOMContentLoaded', loadProjectData);
+    </script>
+</body>
+</html>
