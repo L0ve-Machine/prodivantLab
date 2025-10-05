@@ -135,9 +135,18 @@
             max-width: 100vw;
         }
 
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
         html {
             overflow-x: hidden;
             width: 100%;
+            scrollbar-width: none;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
         }
 
         /* Hero Section */
@@ -147,7 +156,12 @@
             max-width: 100vw;
             height: 850px;
             overflow: hidden;
+            overflow-x: hidden;
             background: #000;
+        }
+
+        .hero-section::-webkit-scrollbar {
+            display: none;
         }
 
         .hero-bg {
