@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Consultation - Prodivant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #0a142f;
+            background: #ffffff;
+            font-weight: 400;
+        }
+
+        /* Header */
+        .header-section {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 25px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-link {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-link img {
+            height: 35px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: #0a142f;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #000000;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #000000;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        /* Consultation Section */
+        .consultation-section {
+            padding: 140px 0 100px;
+            background: #ffffff;
+        }
+
+        .consultation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .consultation-header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .consultation-header h1 {
+            font-size: 64px;
+            font-weight: 300;
+            margin-bottom: 25px;
+            letter-spacing: -2px;
+            position: relative;
+        }
+
+        .consultation-header p {
+            font-size: 20px;
+            color: #6b7280;
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .consultation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .consultation-info {
+            position: sticky;
+            top: 140px;
+        }
+
+        .info-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 40px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #000000;
+        }
+
+        .info-benefits {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .info-benefits li {
+            padding: 0;
+            border: none;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            font-size: 15px;
+            color: #6b7280;
+            font-weight: 400;
+        }
+
+        .info-benefits i {
+            color: #000000;
+            font-size: 20px;
+            margin-top: 2px;
+        }
+
+        .consultation-form-wrapper {
+            background: #fafafa;
+            padding: 60px;
+            border: 1px solid #f0f0f0;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #000000;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid #e5e7eb;
+            border-radius: 0;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.3s;
+            background: #ffffff;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #000000;
+            background: #ffffff;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 20px;
+            background: #000000;
+            color: white;
+            border: none;
+            border-radius: 0;
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .submit-button:hover {
+            background: #ffffff;
+            color: #000000;
+            border: 1px solid #000000;
+        }
+
+        /* Footer */
+        .footer-section {
+            width: 100%;
+            background: #ffffff;
+            padding: 80px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(102, 126, 234, 0.5) 50%, transparent 100%);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            font-weight: 400;
+            color: #0a142f;
+            margin-bottom: 24px;
+            letter-spacing: 0.2px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: #000000;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 15px;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: #000000;
+        }
+
+        .footer-brand img {
+            height: 40px;
+            width: auto;
+            opacity: 0.9;
+        }
+
+        .footer-brand-text {
+            margin-top: 15px;
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-copyright {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social a {
+            display: inline-block;
+        }
+
+        .footer-social img {
+            width: 20px;
+            height: 20px;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-social img:hover {
+            opacity: 1;
+        }
+
+        @media (max-width: 1024px) {
+            .consultation-grid {
+                grid-template-columns: 1fr;
+                max-width: 700px;
+            }
+
+            .consultation-info {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .consultation-header h1 {
+                font-size: 32px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-columns {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .footer-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-section">
+        <div class="header-container">
+            <a href="index.html" class="logo-link">
+                <img src="prodivant-high-resolution-logo-transparent.png" alt="Prodivant">
+            </a>
+            <nav class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="#">Services</a>
+                <a href="works.html">Works</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Consultation Section -->
+    <section class="consultation-section">
+        <div class="consultation-container">
+            <div class="consultation-header">
+                <h1>Free Consultation</h1>
+                <p>Let's discuss your project and explore how we can help bring your vision to life</p>
+            </div>
+
+            <div class="consultation-grid">
+                <div class="consultation-info">
+                    <h2 class="info-title">What You Get</h2>
+                    <ul class="info-benefits">
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>Discuss project requirements in detail</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>Get expert technical recommendations</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>Receive accurate timeline and cost estimates</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>Explore technology stack options</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <span>No obligation, completely free</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="consultation-form-wrapper">
+                    <form id="consultationForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="projectType">Project Type *</label>
+                            <select id="projectType" name="projectType" required>
+                                <option value="">Select project type</option>
+                                <option value="mobile">Mobile App</option>
+                                <option value="web">Web Development</option>
+                                <option value="custom">Custom Software</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="budget">Budget Range</label>
+                            <select id="budget" name="budget">
+                                <option value="">Select budget range</option>
+                                <option value="under-500">Under £500</option>
+                                <option value="500-1000">£500 - £1,000</option>
+                                <option value="1000-2500">£1,000 - £2,500</option>
+                                <option value="2500+">£2,500+</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Project Details *</label>
+                            <textarea id="message" name="message" required placeholder="Tell us about your project..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-button">Book Free Consultation</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="footer-container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <div class="footer-brand">
+                        <img src="prodivant-high-resolution-logo-transparent.png" alt="Prodivant">
+                    </div>
+                    <p class="footer-brand-text">
+                        Affordable IT solutions for startups and entrepreneurs.
+                        High-quality development at 1/10 of traditional prices.
+                    </p>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="works.html?filter=mobile">Mobile Apps</a></li>
+                        <li><a href="works.html?filter=web">Web Development</a></li>
+                        <li><a href="works.html?filter=custom">Custom Software</a></li>
+                        <li><a href="#">IT Consulting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="works.html">Works</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Support Center</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="contact.html">Get in Touch</a></li>
+                        <li><a href="mailto:prodivant.jp@gmail.com">prodivant.jp@gmail.com</a></li>
+                        <li><a href="#">Osaka, Japan</a></li>
+                        <li><a href="#">8:00-22:00 JST</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2024 Prodivant. All rights reserved.
+                </div>
+                <div class="footer-social">
+                    <a href="#"><img src="facebook-icon.svg" alt="Facebook"></a>
+                    <a href="#"><img src="twitter-icon.svg" alt="Twitter"></a>
+                    <a href="#"><img src="instagram-icon.svg" alt="Instagram"></a>
+                    <a href="#"><img src="vimeo-icon.svg" alt="Vimeo"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('consultationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                company: document.getElementById('company').value,
+                projectType: document.getElementById('projectType').value,
+                budget: document.getElementById('budget').value,
+                message: document.getElementById('message').value
+            };
+
+            console.log('Form submitted:', formData);
+            alert('Thank you for booking a consultation! We will contact you within 24 hours.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

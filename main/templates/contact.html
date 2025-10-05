@@ -1,0 +1,538 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Prodivant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Inter:wght@400;500;600;700&family=Prompt:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            background-color: #ffffff;
+        }
+
+        /* Header Styles */
+        .header-section {
+            width: 100%;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-link img {
+            height: 30px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #6366f1;
+        }
+
+        .nav-menu a.active {
+            color: #6366f1;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            width: 100%;
+            max-width: 1200px;
+            margin: 120px auto 100px;
+            padding: 0 40px;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .contact-info {
+            padding-top: 40px;
+        }
+
+        .contact-info h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1a1a1a;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+
+        .contact-info .subtitle {
+            font-size: 18px;
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 48px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            background: #f3f4f6;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-icon i {
+            font-size: 20px;
+            color: #6366f1;
+        }
+
+        .contact-text h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .contact-text p {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .contact-text a {
+            color: #6b7280;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-text a:hover {
+            color: #6366f1;
+        }
+
+        /* Contact Form */
+        .contact-form-container {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 48px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 14px 24px;
+            background: #6366f1;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 8px;
+        }
+
+        .form-submit:hover {
+            background: #4f46e5;
+        }
+
+        /* Footer */
+        .footer-section {
+            width: 100%;
+            background: white;
+            padding: 100px 0 80px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .footer-container {
+            max-width: 1074px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            font-weight: 500;
+            color: #0a142f;
+            margin-bottom: 20px;
+            font-family: 'Inter', sans-serif;
+            line-height: 26.4px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            font-size: 14px;
+            color: #0a142f;
+            opacity: 0.75;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            line-height: 20px;
+            transition: opacity 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            opacity: 1;
+        }
+
+        .footer-logo {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo img {
+            width: 200px;
+            height: auto;
+        }
+
+        .footer-copyright {
+            text-align: center;
+            font-size: 16px;
+            color: #0a142f;
+            font-family: 'Inter', sans-serif;
+            line-height: 26px;
+            margin-bottom: 30px;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer-social a {
+            display: block;
+            width: 18px;
+            height: 18px;
+        }
+
+        .footer-social a img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-section">
+        <div class="header-container">
+            <a href="{% url 'main:index' %}" class="logo-link">
+                <img src="{% static 'images/prodivant-high-resolution-logo-transparent.png' %}" alt="Prodivant">
+            </a>
+            <nav class="nav-menu">
+                <a href="{% url 'main:index' %}">Home</a>
+                <a href="#">Services</a>
+                <a href="#">Portfolio</a>
+                <a href="{% url 'main:contact' %}" class="active">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h1>Get in Touch</h1>
+                <p class="subtitle">Ready to transform your ideas into reality? Let's discuss your project and see how we can help you achieve your goals with our affordable, high-quality IT solutions.</p>
+
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Email</h3>
+                            <p><a href="mailto:prodivant.jp@gmail.com">prodivant.jp@gmail.com</a></p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Phone</h3>
+                            <p>Available upon request</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Office</h3>
+                            <p>Osaka Station Building 2<br>Umeda, Osaka, Japan</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Business Hours</h3>
+                            <p>Monday - Friday<br>8:00 AM - 10:00 PM JST</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-container">
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="company">Company (Optional)</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectType">Project Type</label>
+                        <select id="projectType" name="projectType" required>
+                            <option value="">Select a project type</option>
+                            <option value="mobile">Mobile App Development</option>
+                            <option value="web">Web Development</option>
+                            <option value="custom">Custom Software</option>
+                            <option value="consulting">IT Consulting</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="budget">Budget Range</label>
+                        <select id="budget" name="budget" required>
+                            <option value="">Select your budget</option>
+                            <option value="250-500">$250 - $500</option>
+                            <option value="500-1000">$500 - $1,000</option>
+                            <option value="1000-2500">$1,000 - $2,500</option>
+                            <option value="2500+">$2,500+</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Project Details</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your project..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="form-submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="footer-container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Team</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="{% url 'main:contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Mobile App Development</a></li>
+                        <li><a href="#">Web Development</a></li>
+                        <li><a href="#">Custom Software</a></li>
+                        <li><a href="#">IT Consulting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="mailto:prodivant.jp@gmail.com">prodivant.jp@gmail.com</a></li>
+                        <li><a href="#">Osaka Umeda, Japan</a></li>
+                        <li><a href="#">Mon-Fri 8:00-22:00 JST</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Help</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-logo">
+                <img src="{% static 'images/prodivant-high-resolution-logo-transparent.png' %}" alt="Prodivant">
+            </div>
+            <div class="footer-copyright">
+                © 2024 Prodivant. All rights reserved.
+            </div>
+            <div class="footer-social">
+                <a href="#"><img src="{% static 'images/facebook-icon.svg' %}" alt="Facebook"></a>
+                <a href="#"><img src="{% static 'images/twitter-icon.svg' %}" alt="Twitter"></a>
+                <a href="#"><img src="{% static 'images/instagram-icon.svg' %}" alt="Instagram"></a>
+                <a href="#"><img src="{% static 'images/vimeo-icon.svg' %}" alt="Vimeo"></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Collect form data
+            const formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                company: document.getElementById('company').value,
+                projectType: document.getElementById('projectType').value,
+                budget: document.getElementById('budget').value,
+                message: document.getElementById('message').value,
+                timestamp: new Date().toISOString()
+            };
+
+            // Save to localStorage
+            let submissions = JSON.parse(localStorage.getItem('contactSubmissions') || '[]');
+            submissions.push(formData);
+            localStorage.setItem('contactSubmissions', JSON.stringify(submissions));
+
+            // Show success message
+            alert('Thank you for your message! We will get back to you within 24 hours.');
+
+            // Reset form
+            this.reset();
+        });
+    </script>
+</body>
+</html>
